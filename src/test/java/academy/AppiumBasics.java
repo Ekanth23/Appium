@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
@@ -21,6 +22,7 @@ public class AppiumBasics extends BaseTest{
 		//code to start the server programmatically 
 			
 		//id, xpath, accessibilityid, classname, androidUIAutomator
+		//user appinum by for classname
 		//configureAppium() method to start server will be executed first 
 		//click Preference
 		driver.findElement(AppiumBy.accessibilityId("Preference")).click();
@@ -29,9 +31,17 @@ public class AppiumBasics extends BaseTest{
 		driver.findElement(By.xpath("//android.widget.CheckBox[@resource-id='android:id/checkbox']")).click();
 		//click on the wifisetting
 		driver.findElement(By.xpath("(//android.widget.RelativeLayout)[2]")).click();
-		//xpath syntax
-		//tagName[@attribu
-	
+		
+		//assert the popup wifi window
+		String wifiAlertTitle = driver.findElement(By.id("android:id/alertTitle")).getText();
+		Assert.assertEquals(wifiAlertTitle, "WiFi settings");
+		//eneter wifi name in the popup box
+		driver.findElement(By.id("android:id/edit")).sendKeys("Ekanth wifi");
+		
+		//click on the ok wifi setting 
+		driver.findElements(AppiumBy.className("android.widget.Button")).get(1).click();
+		
+		//Gestures
  
 	}
 
