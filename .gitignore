@@ -1,0 +1,22 @@
+# Maven
+target/
+test-output/
+
+# Logs
+*.log
+
+# APK files
+*.apk
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
