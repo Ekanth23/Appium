@@ -20,40 +20,23 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-public class LongPress extends BaseTest{
+public class ScrollDemo extends BaseTest{
 	
 	@Test
-	public void longPressGestore() throws MalformedURLException, URISyntaxException, InterruptedException
+	public void scrollDemoTest() throws MalformedURLException, URISyntaxException, InterruptedException
 	{
 			
 		//appium github gestures
 		//click on views 
 		driver.findElement(AppiumBy.accessibilityId("Views")).click();
 		
-		//click on the expandabe list 
-		driver.findElement(By.xpath("//android.widget.TextView[@content-desc='Expandable Lists']")).click();
+		//UI automator method for sroll 
+		//this scroll is by google engine
+		scrollToText("WebView");
+		driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"WebView\"));"));
 		
-		//custom developer 
-		driver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
-		
-		//google search
-		//appium github gestures
-		WebElement ele = driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
-		longPressAction(ele);
-//		((JavascriptExecutor)driver).executeScript("mobile: longClickGesture", 
-//				ImmutableMap.of("elementId", ((RemoteWebElement)ele).getId(),
-//						"duration", 2000));
-		
+//		scrollToEndAction();
 		Thread.sleep(2000);
-		
-		String menuText = driver.findElement(By.id("android:id/title")).getText();
-		
-		Assert.assertEquals(menuText, "Sample menu");
-		
-		Assert.assertTrue(driver.findElement(By.id("android:id/title")).isDisplayed());
-		
-		
-		
  
 	}
 

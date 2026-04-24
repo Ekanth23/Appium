@@ -20,40 +20,31 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-public class LongPress extends BaseTest{
+public class DragAndDropDemo extends BaseTest{
 	
 	@Test
-	public void longPressGestore() throws MalformedURLException, URISyntaxException, InterruptedException
+	public void DragAndDropTest() throws MalformedURLException, URISyntaxException, InterruptedException
 	{
 			
+		
 		//appium github gestures
 		//click on views 
 		driver.findElement(AppiumBy.accessibilityId("Views")).click();
+		driver.findElement(AppiumBy.accessibilityId("Drag and Drop")).click();
 		
-		//click on the expandabe list 
-		driver.findElement(By.xpath("//android.widget.TextView[@content-desc='Expandable Lists']")).click();
-		
-		//custom developer 
-		driver.findElement(AppiumBy.accessibilityId("1. Custom Adapter")).click();
-		
-		//google search
-		//appium github gestures
-		WebElement ele = driver.findElement(By.xpath("//android.widget.TextView[@text='People Names']"));
-		longPressAction(ele);
-//		((JavascriptExecutor)driver).executeScript("mobile: longClickGesture", 
-//				ImmutableMap.of("elementId", ((RemoteWebElement)ele).getId(),
-//						"duration", 2000));
+		WebElement source = driver.findElement(By.id("io.appium.android.apis:id/drag_dot_1"));
+
+		((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
+			    "elementId", ((RemoteWebElement) source).getId(),
+			    "endX", 620,
+			    "endY", 628
+			));
 		
 		Thread.sleep(2000);
-		
-		String menuText = driver.findElement(By.id("android:id/title")).getText();
-		
-		Assert.assertEquals(menuText, "Sample menu");
-		
-		Assert.assertTrue(driver.findElement(By.id("android:id/title")).isDisplayed());
-		
-		
-		
+	
+		String result = driver.findElement(By.id("io.appium.android.apis:id/drag_result_text")).getText();
+		System.out.println(result);
+		Assert.assertEquals(result, "Dropped!");
  
 	}
 
