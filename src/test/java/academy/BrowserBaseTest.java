@@ -20,7 +20,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 
-public class BaseTest {
+public class BrowserBaseTest {
 	
 	public AndroidDriver driver; 
 	AppiumDriverLocalService service;
@@ -35,50 +35,14 @@ public class BaseTest {
 				UiAutomator2Options options = new UiAutomator2Options(); 
 				
 				options.setDeviceName("Pixel 7");
-				options.setApp("C:\\Users\\Royal\\eclipse-workspace\\Appium\\src\\test\\java\\resources\\General-Store.apk");
-//				options.setApp("C:\\Users\\Royal\\eclipse-workspace\\Appium\\src\\test\\java\\resources\\ApiDemos-debug.apk");
-//				options.setCapability("chromedriverExecutable", "C:\\Drivers\\chromedriver113\\chromedriver.exe");
 				options.setChromedriverExecutable("C:\\Drivers\\chromedriver113\\chromedriver.exe");
+				options.setCapability("browserName", "Chrome");
+				
 				driver = new AndroidDriver(new URI("http://127.0.0.1:4723").toURL(), options);
 				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 	
-	public void swipeAction(WebElement element, String direction, Double percentage )
-	{
-		((JavascriptExecutor) driver).executeScript("mobile: swipeGesture", ImmutableMap.of(
-				"elementId", ((RemoteWebElement)element).getId(),
-			    "direction", direction,
-			    "percent", percentage
-			));
-	}
-	
-	public void longPressAction(WebElement ele)
-	{
-		
-		((JavascriptExecutor)driver).executeScript("mobile: longClickGesture", 
-				ImmutableMap.of("elementId", ((RemoteWebElement)ele).getId(),
-						"duration", 2000));
-	}
-	
-	public void scrollToText(String text)
-	{
-		driver.findElement(AppiumBy.androidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+text+"\"));"));
 
-	}
-	
-	public void scrollToEndAction()
-	{
-		boolean canScrollMore;
-		
-		do
-		{
-		canScrollMore = (Boolean) ((JavascriptExecutor) driver).executeScript("mobile: scrollGesture", ImmutableMap.of(
-			    "left", 100, "top", 100, "width", 200, "height", 200,
-			    "direction", "down",
-			    "percent", 1.0
-			));
-		}while(canScrollMore);
-	}
 	
 	public double getStringToDouble(String amount)
 	{
