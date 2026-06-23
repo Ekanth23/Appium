@@ -26,7 +26,7 @@ public class MobileBrowserTest extends BrowserBaseTest{
 		
 		Thread.sleep(2000);
 		Assert.assertEquals(text, "Devops");
-		
+		 
 		
 		
 		
